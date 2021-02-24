@@ -1,0 +1,66 @@
+.industries__list {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	padding-left: 15px!important;
+
+	/* Variables */
+	--square-size: 2px;
+}
+
+.industry__item {
+	width: 100%;
+	position: relative;
+	align-items: center;
+	padding: 10px 0 10px 30px;
+	background-color: #FBFBFB;
+}
+.industry__item:not(:first-child) {
+	margin-top: 8px;
+}
+
+.drag__icon {
+	width: calc(var(--square-size) * 3);
+	height: calc((var(--square-size) * 2) * 3);
+	position: absolute;
+	left: 10px;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	flex-wrap: wrap;
+	z-index: 1;
+}
+.drag__square {
+	width: var(--square-size);
+	height: var(--square-size);
+	background-color: #000;
+	margin: 1px;
+}
+.drag__square:nth-child(odd) {
+	margin-left: 0;
+}
+.drag__square:nth-child(even) {
+	margin-right: 0;
+}
+
+.industry__name {
+	margin: 0;
+}
+
+.industry__remove {
+	width: 31px;
+	height: 100%;
+	position: absolute;
+	right: 0;
+	border: none;
+	background: none;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 0;
+	cursor: pointer;
+}
+.industry__remove img {
+	width: 14px;
+	height: 14px;
+}
