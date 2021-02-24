@@ -1,0 +1,65 @@
+.custom__switch {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+.custom__switch:focus {
+	background-color: transparent;
+}
+.custom__switch__bg {
+	min-width: 48px;
+	min-height: 24px;
+	position: relative;
+	background-color: #727272;
+	border-radius: 20px;
+	transition: background-color .3s, box-shadow .3s;
+}
+.custom__switch__bg:hover {
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+.custom__switch__dot {
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	left: 3px;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	background-color: #fff;
+	border-radius: 50%;
+	transition: left .3s;
+}
+
+.custom__switch--active .custom__switch__dot {
+	left: calc(100% - 21px);
+}
+.custom__switch--active .custom__switch__bg {
+	background-color: #24CA97;
+}
+
+.industry__divider {
+	height: 1px;
+	width: 100%;
+	position: relative;
+	margin: 30px 0;
+	background-color: #E0E0E0;
+}
+.industry__divider__text {
+	width: 40px;
+	height: 23px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	justify-content: center;
+	align-items: center;
+	border-radius: 62px;
+	background-color: #FBFBFB;
+	color: #727272;
+}
+.industry__divider__text > p {
+	margin: 0;
+	text-align: center;
+}
