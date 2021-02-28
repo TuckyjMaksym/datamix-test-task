@@ -21,7 +21,7 @@ const CustomSwitch = (props: SwitchProps): JSX.Element => {
 		classes += ' custom__switch--active';
 	}
 	return (
-		<button className={classes} onClick={onClick}>
+		<button type="button" className={classes} onClick={onClick}>
 			<div className="custom__switch__bg">
 				<div className="custom__switch__dot" />
 			</div>

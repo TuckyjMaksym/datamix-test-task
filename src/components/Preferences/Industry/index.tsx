@@ -10,6 +10,7 @@ import arrowForwardImg from '../../../assets/arrow_forward.svg';
 
 // Interfaces
 import { RootState } from '../../../reducers';
+import { IndustryType } from '../../../reducers/app';
 
 // Store
 import * as appTypes from '../../../reducers/app/types';
@@ -22,8 +23,10 @@ import { List } from './List';
 
 const Industry = (): JSX.Element => {
 	const {
-		industries,
 		isAgnostic,
+		isSendingData,
+		selectedIndustries,
+		selectedExclusions,
 		isLoadingIndustries
 	} = useSelector((state: RootState) => state.app);
 
@@ -33,9 +36,47 @@ const Industry = (): JSX.Element => {
 	React.useEffect(() => {
 		dispatch(appThunks.loadIndustries());
 	}, []);
+	let industriesClasses = 'industries__container flex-column';
+	
+	if (isAgnostic) {
+		industriesClasses += ' industries__container--disabled';
+	}
+	const renderResetBtn = () => {
+		if (selectedIndustries.length === 0 && selectedExclusions.length === 0) {
+			return null;
+		}
+		let resetBtnText = 'Reset industries';
+
+		if (selectedIndustries.length > 0 && selectedExclusions.length > 0) {
+			resetBtnText = 'Reset all';
+		}
+		let resetClasses = 'reset';
+
+		if (isAgnostic) {
+			resetClasses += ' reset--disabled';
+		}
+		return (
+			<div className={resetClasses}>
+				<button
+					className="reset__industries"
+					disabled={isAgnostic}
+					onClick={() => dispatch(appTypes.resetIndustries())}
+					type="button"
+				>
+					{resetBtnText}
+				</button>
+			</div>
+		);
+	};
 
 	return (
-		<div className="industry__container flex-column">
+		<form
+			className="industry__container flex-column"
+			onSubmit={(e) => {
+				e.preventDefault();
+				dispatch(appThunks.sendDataToServer());
+			}}
+		>
 			<p className="industry__text semi-bold">
 				Determine your industry preferences
 			</p>
@@ -55,53 +96,57 @@ const Industry = (): JSX.Element => {
 					</p>
 				</div>
 			</div>
-			<div className="industries__container flex-column">
-				<div className="industries__block flex-column">
-					<form className="industries__search__form">
-						<div className="industries__search__container flex-column">
-							<SearchInput
-								disabled={isLoadingIndustries}
-								label="Add industries"
-								placeholder="Search industry"
-								id="SearchIndustry"
-							/>
+			<div className={industriesClasses}>
+				<div className="industries__wrapper">
+					<div className="industries__block flex-column">
+						<div className="industries__search__form">
+							<div className="industries__search__container flex-column">
+								<SearchInput
+									type={IndustryType.industry}
+									disabled={isAgnostic || isLoadingIndustries}
+									label="Add industries"
+									placeholder="Search industry"
+									id="SearchIndustry"
+								/>
+							</div>
 						</div>
-					</form>
-					{industries.length > 0 && (
-						<div className="industries__list__container flex-row">
-							{industries.length > 2 && (
-								<div className="interest__block flex-column">
-									<p className="interest__high">High</p>
-									<p className="interest__Low">Low</p>
-								</div>
-							)}
-							<List industries={[industries[0], industries[1]]} />
+						{selectedIndustries.length > 0 && (
+							<div className="industries__list__container flex-row">
+								{selectedIndustries.length > 2 && (
+									<div className="interest__block flex-column">
+										<p className="interest__high">High</p>
+										<p className="interest__Low">Low</p>
+									</div>
+								)}
+								<List disabled={isAgnostic} items={selectedIndustries} />
+							</div>
+						)}
+					</div>
+					<div className="exclusions__block flex-column">
+						<div className="exclusions__search__form">
+							<div className="exclusions__search__container flex-column">
+								<SearchInput
+									type={IndustryType.exclusion}
+									disabled={isAgnostic || isLoadingIndustries}
+									label="Add exclusions if any"
+									placeholder="Search industry"
+									id="SearchExclusion"
+								/>
+							</div>
 						</div>
-					)}
-				</div>
-				<div className="exclusions__block flex-column">
-					<form className="exclusions__search__form">
-						<div className="exclusions__search__container flex-column">
-							<SearchInput
-								disabled={isLoadingIndustries}
-								label="Add exclusions if any"
-								placeholder="Search industry"
-								id="SearchExclusion"
-							/>
-						</div>
-					</form>
-				</div>
-				<div className="reset">
-					<button className="reset__industries">
-						Reset industries
-					</button>
+					</div>
+					{renderResetBtn()}
 				</div>
 			</div>
-			<button className="continue flex-row font-14">
+			<button
+				className="continue-btn flex-row font-14"
+				disabled={isSendingData}
+				type="submit"
+			>
 				Continue
 				<img src={arrowForwardImg} alt="Continue" />
 			</button>
-		</div>
+		</form>
 	);
 };
 

@@ -1,7 +1,13 @@
 // Modules
 import React from 'react';
-import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-import { Industry } from '../../../../reducers/app';
+import { useDispatch } from 'react-redux';
+import {
+	Droppable,
+	Draggable,
+	DragDropContext,
+	DraggableProvided,
+	DroppableProvided,
+} from 'react-beautiful-dnd';
 
 // Styles
 import './List.css';
@@ -9,51 +15,92 @@ import './List.css';
 // Images
 import removeIcn from '../../../../assets/remove_industry_icn.svg';
 
+// Store
+import { IndustryType, SelectedIndustry } from '../../../../reducers/app';
+import { removeIndustry } from '../../../../reducers/app/types';
+import { handleDragEnd } from '../../../../reducers/app/thunks';
+
+// Interfaces
 interface ListProps {
-	industries: Industry[],
+	items: SelectedIndustry[],
+	disabled: boolean,
 }
 
-interface SortableItemProps {
-	item: Industry,
-}
-const SortableItem = SortableElement((props: SortableItemProps) => {
-	const { item } = props;
+export const List = (props: ListProps): JSX.Element => {
+	const dispatch = useDispatch();
 
-	return (
-		<li className="industry__item flex-row">
-			<div className="drag__icon flex-row">
-				<div className="drag__square" />
-				<div className="drag__square" />
-				<div className="drag__square" />
-				<div className="drag__square" />
-				<div className="drag__square" />
-				<div className="drag__square" />
-			</div>
-			<p className="industry__name">
-				{item.title}
-			</p>
-			<button className="industry__remove flex-row">
-				<img src={removeIcn} alt="Remove industry" />
-			</button>
-		</li>
-	);
-});
-interface SortableContainerProps {
-	items: Industry[],
-}
-const SortableList = SortableContainer((props: SortableContainerProps) => {
-	const { items } = props;
+	const { items, disabled } = props;
+	const orderedItems = items.sort((a, b) => a.order - b.order);
+	const removeItem = (item: SelectedIndustry): void => {
+		dispatch(removeIndustry(item));
+	};
+	const renderDraggableItem = (provided: DraggableProvided, item: SelectedIndustry) => {
+		let listItemClasses = 'industry__item flex-row';
 
-	return (
-		<ul className="industries__list">
-			{items.map((item, index) => (
-				<SortableItem key={item.id} index={index} item={item} />
+		if (disabled) {
+			listItemClasses += ' industry__item--disabled';
+		}
+		return (
+			<li
+				ref={provided.innerRef}
+				className={listItemClasses}
+				{...provided.draggableProps}
+				{...provided.dragHandleProps}
+			>
+				<div className="drag__icon flex-row">
+					<div className="drag__square" />
+					<div className="drag__square" />
+					<div className="drag__square" />
+					<div className="drag__square" />
+					<div className="drag__square" />
+					<div className="drag__square" />
+				</div>
+				<p className="industry__name">
+					{item.title}
+				</p>
+				<button
+					className="industry__remove flex-row"
+					onClick={() => removeItem(item)}
+				>
+					<img src={removeIcn} alt="Remove industry" />
+				</button>
+			</li>
+		);
+	};
+	const industriesListStyle: React.CSSProperties = {};
+
+	if (items.length <= 2) {
+		industriesListStyle.width = '100%';
+	}
+	const renderDroppableContainer = (provided: DroppableProvided) => (
+		<ul
+			className="industries__list"
+			style={industriesListStyle}
+			ref={provided.innerRef}
+			{...provided.droppableProps}
+		>
+			{orderedItems.map((item, index) => (
+				<Draggable
+					key={item.id}
+					index={index}
+					draggableId={item.id}
+					isDragDisabled={disabled}
+				>
+					{(draggableProvided) => renderDraggableItem(draggableProvided, item)}
+				</Draggable>
 			))}
+			{provided.placeholder}
 		</ul>
 	);
-});
-export const List = (props: ListProps): JSX.Element => {
-	const { industries } = props;
 
-	return <SortableList items={industries} />;
+	return (
+		<DragDropContext onDragEnd={(result) => dispatch(handleDragEnd(result))}>
+			<Droppable
+				isDropDisabled={disabled}
+				droppableId={IndustryType.industry}
+			>
+				{renderDroppableContainer}
+			</Droppable>
+		</DragDropContext>
+	);
 };

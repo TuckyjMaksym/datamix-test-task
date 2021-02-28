@@ -20,6 +20,7 @@
 .tab__btn:last-child {
 	border-radius: 0 2px 2px 0;
 }
+.tab__btn:focus,
 .tab__btn:hover {
 	background-color: #e7e7e7;
 }
