@@ -8,6 +8,7 @@ import { Chip, Icon } from 'react-materialize';
 
 // Styles
 import './SearchInput.css';
+import './SearchInput.media.css';
 
 // Images
 import searchIcn from '../../../../assets/search_icn.svg';

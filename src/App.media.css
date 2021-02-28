@@ -1,0 +1,18 @@
+@media screen and (max-width: 1150px) {
+	.App {
+		padding-bottom: 50px;
+	}
+    .App h2 {
+		text-align: center;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	* {
+		font-size: 11px;
+	}
+	.App h2 {
+		font-size: 30px;
+		margin-bottom: 10px;
+	}
+}

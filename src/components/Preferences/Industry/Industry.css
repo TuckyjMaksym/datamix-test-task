@@ -25,6 +25,7 @@
 }
 
 .industries__wrapper {
+	width: 100%;
 	max-width: 385px;
 }
 
@@ -38,6 +39,12 @@
 }
 .interest__block p {
 	transform: rotate(-90deg);
+}
+.interest__block--disabled {
+	background: linear-gradient(0, #FFFFFF 0%, #F4F4F4 100%);
+}
+.interest__block--disabled p {
+	color: #E0DDDD;
 }
 
 .exclusions__block {

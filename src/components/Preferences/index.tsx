@@ -5,6 +5,7 @@ import { Button, CardPanel } from 'react-materialize';
 // Styles
 import 'simplebar/dist/simplebar.min.css';
 import './Preferences.css';
+import './Preferences.media.css';
 
 // Components
 import { PreferencesPanel } from '../presentational/PreferencesPanel';

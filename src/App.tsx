@@ -4,6 +4,7 @@ import 'materialize-css/dist/css/materialize.min.css';
 
 // Styles
 import './App.css';
+import './App.media.css';
 
 // Components
 import Preferences from './components/Preferences';
