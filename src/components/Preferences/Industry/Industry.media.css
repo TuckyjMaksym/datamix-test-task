@@ -1,0 +1,20 @@
+@media screen and (max-width: 780px) {
+	.industry__container {
+		align-items: center;
+	}
+	.industries__container {
+		align-items: center;
+	}
+	.reset {
+		justify-content: center;
+		margin: 25px 0 0;
+	}
+	.agnostic {
+		margin-top: 10px;
+		flex-direction: row;
+		align-items: center;
+	}
+	.agnostic p {
+		margin: 0;
+	}
+}

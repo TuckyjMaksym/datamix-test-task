@@ -1,0 +1,55 @@
+@media screen and (max-width: 1150px) {
+	.tabs__container {
+		display: flex;
+		max-width: 100%;
+		overflow: scroll hidden;
+		-ms-overflow-style: none;
+  		scrollbar-width: none;
+	}
+	.tabs__container::-webkit-scrollbar {
+		display: none;
+	  }
+	.tab__btn {
+		white-space: nowrap;
+	}
+	.tab__btn:hover {
+		background-color: #F4F4F4;
+		box-shadow: none;
+	}
+	.tab__btn--selected:hover {
+		background-color: #4f5379;
+	}
+
+	.info__panel {
+		position: fixed;
+		bottom: 0;
+		right: 0;
+		max-height: 38px;
+		overflow: hidden;
+		justify-content: flex-start;
+		margin: 0;
+		transition: max-height .3s;
+	}
+	.info__panel:hover {
+		max-height: calc(100vh - 150px);
+	}
+}
+
+@media screen and (max-width: 780px) {
+	.tabs__container {
+		justify-content: center;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.tabs__container {
+		justify-content: initial;
+	}
+	.tab__btn {
+		font-size: 12px;
+	}
+	.info__panel {
+		left: 0;
+		margin: auto;
+	}
+}

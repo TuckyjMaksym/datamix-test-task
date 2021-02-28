@@ -1,5 +1,6 @@
 .preferences__content {
 	width: 100%;
+	min-height: 300px;
 	max-width: 770px;
 	padding: 25px;
 	background-color: #fff;
@@ -46,6 +47,7 @@
 	justify-content: center;
 	margin-left: 30px;
 	padding: 0!important;
+	z-index: 2;
 }
 .panel__header {
 	background: rgba(46, 48, 68, 0.8);
@@ -109,4 +111,4 @@
 
 .simplebar-scrollbar::before {
 	background-color: #A9AAAF;
-  }
+}

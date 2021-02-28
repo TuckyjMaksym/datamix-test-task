@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // Styles
 import './Industry.css';
+import './Industry.media.css';
 
 // Assets
 import arrowForwardImg from '../../../assets/arrow_forward.svg';
@@ -50,7 +51,7 @@ const Industry = (): JSX.Element => {
 		if (selectedIndustries.length > 0 && selectedExclusions.length > 0) {
 			resetBtnText = 'Reset all';
 		}
-		let resetClasses = 'reset';
+		let resetClasses = 'reset flex-row';
 
 		if (isAgnostic) {
 			resetClasses += ' reset--disabled';
@@ -68,7 +69,11 @@ const Industry = (): JSX.Element => {
 			</div>
 		);
 	};
+	let interestBlockClasses = 'interest__block flex-column';
 
+	if (isAgnostic) {
+		interestBlockClasses += ' interest__block--disabled';
+	}
 	return (
 		<form
 			className="industry__container flex-column"
@@ -113,7 +118,7 @@ const Industry = (): JSX.Element => {
 						{selectedIndustries.length > 0 && (
 							<div className="industries__list__container flex-row">
 								{selectedIndustries.length > 2 && (
-									<div className="interest__block flex-column">
+									<div className={interestBlockClasses}>
 										<p className="interest__high">High</p>
 										<p className="interest__Low">Low</p>
 									</div>
