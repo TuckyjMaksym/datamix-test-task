@@ -1,17 +1,35 @@
+.input__select {
+	min-height: var(--input-min-height);
+	padding: 0!important;
+	border: none!important;
+	margin-top: 10px;
+
+	--input-min-height: 48px;
+}
+.input__select .react-dropdown-select-dropdown {
+	background-color: #F4F4F4;
+	border: none;
+}
+
 .search__input__wrapper {
 	position: relative;
-	margin-top: 10px;
 }
+
+.react-dropdown-select-content {
+	padding-left: 50px;
+}
+
 .search__input {
-	padding-left: 50px!important;
+	min-height: var(--input-min-height);
 	margin: 0!important;
 	background-color: #fff;
 	background-color: #F4F4F4!important;
 	border-radius: 2px 2px 0 0!important;
+	border: none!important;
 	box-sizing: border-box!important;
+	font-family: 'Roboto'!important;
 }
 .search__input:focus {
-	border-bottom: 1px solid #727272!important;
 	box-shadow: none!important;
 }
 
@@ -19,10 +37,10 @@
 	width: 16px;
 	height: 16px;
 	position: absolute;
-	top: 0;
-	bottom: 0;
+	bottom: 16px;
 	left: 15px;
 	margin: auto;
+	z-index: 1;
 }
 .search__icon img {
 	width: 100%;
@@ -31,8 +49,64 @@
 	transition: opacity .3s;
 }
 
+.input__tag__wrapper {
+	height: var(--input-min-height);
+	align-items: center;
+	padding: 2.5px 3px;
+	box-sizing: border-box;
+}
+.input__tag {
+	max-width: 105px;
+	display: flex;
+	margin: 0;
+	background-color: rgba(198, 198, 198, 0.5);
+	color: #727272;
+}
+.input__tag p {
+	max-width: 100%;
+	margin: 0;
+	padding: 0;
+	font-weight: 400;
+}
 
-/* Focused */
+.dropdown__item {
+	width: 100%;
+}
+.dropdown__item:not(:first-child) {
+	border-top: 1px solid #E0E0E0;
+}
+.dropdown__btn {
+	width: 100%;
+	text-align: left;
+	border: none;
+	background: none;
+	padding: 15px 40px;
+	cursor: pointer;
+}
+.dropdown__btn:hover {
+	background-color: #E9E9E9;
+}
+
+.search__input__wrapper--focused {
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
+}
+
 .search__input__wrapper--focused .search__icon img {
 	opacity: 1;
+}
+
+.search__exclusion, .search__industry {
+	background-color: #F4F4F4;
+	border-bottom: 1px solid #727272!important;
+}
+.search__input__wrapper--exclusion {
+	margin-top: 0;
+}
+.search__input__wrapper--exclusion .search__input {
+	padding-left: 15px!important;
+}
+
+/* Disabled */
+.input__label--disabled {
+	color: #E0DDDD;
 }

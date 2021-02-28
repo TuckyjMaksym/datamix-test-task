@@ -1,7 +1,9 @@
 .industry__container {
 	width: 100%;
-	max-width: 385px;
 	align-items: flex-start;
+
+	--interest-block-width: 32px;
+	--interes-block-margin-right: 15px;
 }
 
 .industry__text {
@@ -19,15 +21,20 @@
 .industries__container {
 	width: 100%;
 	border-bottom: 1px solid #E6E6E6;
+	padding-bottom: 25px;
 }
 
-.industries__list__container {
-	margin-top: 15px;
+.industries__wrapper {
+	max-width: 385px;
 }
+
 .interest__block {
+	width: var(--interest-block-width);
 	padding: 10px 0;
+	margin-top: 15px;
 	justify-content: space-between;
 	background: linear-gradient(0, rgba(191, 243, 227, 0.7) 0%, rgba(36, 202, 151, 0.7) 100%);
+	margin-right: var(--interes-block-margin-right);
 }
 .interest__block p {
 	transform: rotate(-90deg);
@@ -38,7 +45,7 @@
 }
 
 .reset {
-	margin: 40px 0 40px 10px;
+	margin: 40px 0 15px 10px;
 }
 .reset button {
 	color: #629EC3;
@@ -46,11 +53,15 @@
 	background: none;
 	cursor: pointer;
 }
-.reset button:hover {
+.reset button:not(:disabled):hover {
 	color: #70b7e4;
 }
+.reset--disabled button:disabled {
+	color: #E0DDDD;
+	cursor: default;
+}
 
-.continue {
+.continue-btn {
 	width: 183px;
 	height: 48px;
 	border: none;
@@ -62,10 +73,17 @@
 	color: #fff;
 	cursor: pointer;
 	margin-top: 24px;
+	border-radius: 2px;
 }
-.continue img {
+.continue-btn img {
 	width: 14px;
 }
-.continue:hover {
+.continue-btn:not(:disabled):hover,
+.continue-btn:not(:disabled):active,
+.continue-btn:not(:disabled):focus {
 	background-color: #35e4af;
+}
+.continue-btn:disabled {
+	background-color: #F4F4F4;
+	color: #E0DDDD;
 }
